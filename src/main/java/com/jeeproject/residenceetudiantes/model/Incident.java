@@ -1,0 +1,39 @@
+package com.jeeproject.residenceetudiantes.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+import java.util.Date;
+
+
+
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class Incident {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    private String type;
+    private String description;
+
+    @Temporal(TemporalType.DATE)
+    private Date dateSignalement;
+
+    private String statut;
+
+    @ManyToOne
+    @JoinColumn(name = "resident_id")
+    private Resident resident;
+
+    @ManyToOne
+    @JoinColumn(name = "technicien_id")
+    private Technicien technicien;
+}
